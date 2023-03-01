@@ -1,6 +1,7 @@
 package br.com.uniamerica.chamada.repository;
 
 import br.com.uniamerica.chamada.entity.Aluno;
+import br.com.uniamerica.chamada.entity.Configuracao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,14 +12,4 @@ import org.springframework.stereotype.Repository;
  * @since 1.0.0
  */
 @Repository
-public interface AlunoRepository extends JpaRepository<Aluno, Long> {
-
-    /**
-     * Busca o Aluno pelo RA
-     *
-     * @param ra
-     * @return
-     */
-    public Aluno findByRa(final int ra);
-
-}
+public interface ConfiguracaoRepository extends JpaRepository<Configuracao, Long> { }

@@ -1,9 +1,9 @@
 package br.com.uniamerica.chamada.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -13,15 +13,32 @@ import lombok.Setter;
  * @since 1.0.0
  */
 @Entity
+@NoArgsConstructor
 @Table(name = "alunos", schema = "public")
 public class Aluno extends AbstractEntity {
+
+    @Getter @Setter
+    @Column(name = "ra", nullable = false, unique = true)
+    private int ra;
 
     @Getter @Setter
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
 
     @Getter @Setter
-    @Column(name = "ra", nullable = false, unique = true)
-    private int ra;
+    @JoinColumn(name = "turma_id", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Turma turma;
 
+    /**
+     *
+     * @param ra
+     * @param nome
+     * @param turma
+     */
+    public Aluno(int ra, String nome, Turma turma) {
+        this.ra = ra;
+        this.nome = nome;
+        this.turma = turma;
+    }
 }

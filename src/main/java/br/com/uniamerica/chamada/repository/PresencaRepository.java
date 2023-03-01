@@ -1,6 +1,6 @@
 package br.com.uniamerica.chamada.repository;
 
-import br.com.uniamerica.chamada.entity.Chamada;
+import br.com.uniamerica.chamada.entity.Presenca;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +11,4 @@ import org.springframework.stereotype.Repository;
  * @since 1.0.0
  */
 @Repository
-public interface ChamadaRepository extends JpaRepository<Chamada, Long> { }
+public interface PresencaRepository extends JpaRepository<Presenca, Long> { }

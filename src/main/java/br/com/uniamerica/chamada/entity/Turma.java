@@ -3,7 +3,9 @@ package br.com.uniamerica.chamada.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -13,6 +15,8 @@ import lombok.Setter;
  * @since 1.0.0
  */
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "turmas", schema = "public")
 public class Turma extends AbstractEntity {
 
@@ -25,6 +29,20 @@ public class Turma extends AbstractEntity {
     private int ano;
 
     @Getter @Setter
-    @Column(name = "periodo", nullable = false, unique = true)
-    private int periodo;
+    @Column(name = "semestre", nullable = false, unique = true)
+    private int semestre;
+
+    /**
+     *
+     * @param id
+     * @param nome
+     * @param ano
+     * @param semestre
+     */
+    public Turma(Long id, String nome, int ano, int semestre) {
+        super(id);
+        this.nome = nome;
+        this.ano = ano;
+        this.semestre = semestre;
+    }
 }

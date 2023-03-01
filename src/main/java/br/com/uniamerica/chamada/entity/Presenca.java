@@ -12,7 +12,7 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "presencas", schema = "public")
-public class Chamada extends AbstractEntity {
+public class Presenca extends AbstractEntity {
 
     @Getter @Setter
     @JoinColumn(name = "aluno_id", nullable = false)
