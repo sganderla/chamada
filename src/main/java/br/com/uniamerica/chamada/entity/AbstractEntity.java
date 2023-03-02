@@ -19,16 +19,20 @@ public abstract class AbstractEntity {
 
     @Id
     @Getter @Setter
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter @Setter
-    private LocalDateTime dtCadastro;
+    @Getter
+    @Column(name = "cadastro", nullable = false)
+    private LocalDateTime cadastro;
+
+    @Getter
+    @Column(name = "edicao")
+    private LocalDateTime edicao;
 
     @Getter @Setter
-    private LocalDateTime dtEdicao;
-
-    @Getter @Setter
+    @Column(name = "ativo", nullable = false)
     private boolean ativo;
 
     /**
@@ -44,7 +48,7 @@ public abstract class AbstractEntity {
      */
     @PrePersist
     public void prePersist(){
-        this.dtCadastro = LocalDateTime.now();
+        this.cadastro = LocalDateTime.now();
         this.ativo = true;
     }
 
@@ -53,6 +57,6 @@ public abstract class AbstractEntity {
      */
     @PreUpdate
     public void preUpdate(){
-        this.dtEdicao = LocalDateTime.now();
+        this.edicao = LocalDateTime.now();
     }
 }

@@ -28,14 +28,17 @@ public class CriarProjetoTask implements InitialTask {
     @Override
     public void perform() {
 
-        final List<Projeto> projetos = new ArrayList<Projeto>();
+        if(this.projetoRepository.findAll().isEmpty()) {
 
-        projetos.add(new Projeto(1L, "Projeto Integrador"));
-        projetos.add(new Projeto(2L, "Primeiro Projeto"));
-        projetos.add(new Projeto(3L, "Segundo Projeto"));
-        projetos.add(new Projeto(4L, "Terceiro Projeto"));
-        projetos.add(new Projeto(5L, "Quarto Projeto"));
+            final List<Projeto> projetos = new ArrayList<Projeto>();
 
-        this.projetoRepository.saveAll(projetos);
+            projetos.add(new Projeto(1L, "Projeto Integrador"));
+            projetos.add(new Projeto(2L, "Primeiro Projeto"));
+            projetos.add(new Projeto(3L, "Segundo Projeto"));
+            projetos.add(new Projeto(4L, "Terceiro Projeto"));
+            projetos.add(new Projeto(5L, "Quarto Projeto"));
+
+            this.projetoRepository.saveAll(projetos);
+        }
     }
 }

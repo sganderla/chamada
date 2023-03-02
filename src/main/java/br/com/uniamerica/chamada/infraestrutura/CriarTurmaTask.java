@@ -25,8 +25,10 @@ public class CriarTurmaTask implements InitialTask {
     @Override
     public void perform() {
 
-        final Turma turma = new Turma(1L, "Terceiro Periodo", 2023, 1);
+        if(this.turmaRepository.findAll().isEmpty()) {
+            final Turma turma = new Turma(1L, "Terceiro Periodo", 2023, 1);
 
-        this.turmaRepository.save(turma);
+            this.turmaRepository.save(turma);
+        }
     }
 }

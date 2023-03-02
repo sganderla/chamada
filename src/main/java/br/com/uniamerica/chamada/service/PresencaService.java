@@ -9,18 +9,14 @@ import br.com.uniamerica.chamada.repository.ProjetoRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDateTime;
 
 /**
  * @author Eduardo Sganderla
@@ -44,17 +40,30 @@ public class PresencaService {
      * @param presenca
      * @return
      */
-    @Transactional(readOnly = true, rollbackFor = Exception.class)
+    @Transactional( rollbackFor = Exception.class)
     public Presenca cadastrar(
             final HttpServletRequest httpServletRequest,
             @RequestBody final Presenca presenca
     ) throws UnknownHostException {
 
-        Assert.isTrue(presenca.getAluno().getRa() >= 0, "Ra não Informado.");
+        Assert.isTrue(presenca.getAluno().getRa() >= 100000, "Ra não Informado.");
 
-        final Aluno aluno = this.alunoRepository.findByRa(presenca.getAluno().getRa());
+        final Aluno aluno = this.alunoRepository.findByRaAndAtivoTrue(presenca.getAluno().getRa());
 
         Assert.isTrue(aluno != null, "Ra informado é invalido.");
+
+        final Presenca presencaControle = this.presencaRepository.findByAluno(aluno.getId());
+
+        if (presencaControle != null) {
+            Assert.isTrue(presencaControle.getCadastro()
+                    .plusMinutes(30)
+                    .compareTo(LocalDateTime.now()) != 1,
+                        "Presença já realizada. " +
+                                        "Aluno: " + presencaControle.getAluno().getNome() + " " +
+                                        "Registro: " + presencaControle.getCadastro());
+        }
+
+        Assert.isTrue(aluno.getTurma().isAtivo() == true, "Turma inválida.");
 
         presenca.setAluno(aluno);
         presenca.setTurma(aluno.getTurma());
@@ -63,6 +72,8 @@ public class PresencaService {
                     ? this.projetoRepository.getReferenceById(1L)
                     : this.projetoRepository.getReferenceById(2L));
         presenca.setIdentificacao(HttpUtils.getRequestIP(httpServletRequest));
+
+        Assert.isTrue(presenca.getProjeto().isAtivo() == true, "Projeto inválido.");
 
         return this.presencaRepository.save(presenca);
     }

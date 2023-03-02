@@ -19,6 +19,6 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
      * @param ra
      * @return
      */
-    public Aluno findByRa(final int ra);
+    public Aluno findByRaAndAtivoTrue(final int ra);
 
 }

@@ -37,6 +37,6 @@ public class PresencaController {
 
         return new ResponseEntity<>(
                 "Presença realizada com sucesso. Hora do registro: "
-                        + newPresenca.getDtCadastro(), HttpStatus.OK);
+                        + newPresenca.getCadastro(), HttpStatus.OK);
     }
 }
