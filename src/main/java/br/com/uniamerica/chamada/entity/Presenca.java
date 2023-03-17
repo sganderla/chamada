@@ -16,21 +16,30 @@ public class Presenca extends AbstractEntity {
 
     @Getter @Setter
     @JoinColumn(name = "aluno_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     private Aluno aluno;
 
     @Getter @Setter
     @JoinColumn(name = "turma_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     private Turma turma;
 
     @Getter @Setter
     @JoinColumn(name = "projeto_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     private Projeto projeto;
+
+    @Getter @Setter
+    @JoinColumn(name = "chamada_id", nullable = false)
+    @ManyToOne(optional = false)
+    private Chamada chamada;
 
     @Getter @Setter
     @Column(name = "identificacao", nullable = false, length = 255)
     private String identificacao;
+
+    @Getter @Setter
+    @Column(name = "professor", nullable = false)
+    private boolean professor;
 
 }

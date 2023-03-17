@@ -38,7 +38,7 @@ public class CriarAlunosTask implements InitialTask {
             final Turma turma = this.turmaRepository.getReferenceById(1L);
             final List<Aluno> alunos = new ArrayList<Aluno>();
 
-            alunos.add(new Aluno(100001, "AlunoTeste", turma));
+            alunos.add(new Aluno(500001, "AlunoTeste", turma));
             alunos.add(new Aluno(504471, "Ademar Ramalho de Souza Neto", turma));
             alunos.add(new Aluno(504473, "Adilson Cury Neto", turma));
             alunos.add(new Aluno(503908, "Andre Gabriel Chang", turma));

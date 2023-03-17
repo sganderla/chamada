@@ -1,7 +1,7 @@
 package br.com.uniamerica.chamada.repository;
 
-import br.com.uniamerica.chamada.entity.Aluno;
 import br.com.uniamerica.chamada.entity.Configuracao;
+import br.com.uniamerica.chamada.entity.Turma;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +12,12 @@ import org.springframework.stereotype.Repository;
  * @since 1.0.0
  */
 @Repository
-public interface ConfiguracaoRepository extends JpaRepository<Configuracao, Long> { }
+public interface ConfiguracaoRepository extends JpaRepository<Configuracao, Long> {
+
+    /**
+     *
+     * @param turma
+     * @return
+     */
+    public Configuracao findByTurma(Turma turma);
+}

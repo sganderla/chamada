@@ -25,11 +25,11 @@ public class Turma extends AbstractEntity {
     private String nome;
 
     @Getter @Setter
-    @Column(name = "ano", nullable = false, unique = true)
+    @Column(name = "ano", nullable = false)
     private int ano;
 
     @Getter @Setter
-    @Column(name = "semestre", nullable = false, unique = true)
+    @Column(name = "semestre", nullable = false)
     private int semestre;
 
     /**

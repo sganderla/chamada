@@ -27,7 +27,7 @@ public class Aluno extends AbstractEntity {
 
     @Getter @Setter
     @JoinColumn(name = "turma_id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Turma turma;
 
     /**
